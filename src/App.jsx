@@ -56,7 +56,7 @@ function App() {
       <Spacer type="spacer layer-2-lower"/>
 
       <Section color="plain" heading="Our Clients" id="clients">
-        <img src="./src/assets/images/companies.png"></img>
+      <img src={`${process.env.PUBLIC_URL}/assets/images/companies.png`} />
       </Section>
 
       <Spacer type="spacer layer-3"/>
