@@ -180,9 +180,9 @@ section p {
 }
 
 .row-card-sec{
-  width: 75vw;
+  width: 66vw;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-direction: row-reverse;
   flex-wrap: wrap;
 }
@@ -194,7 +194,7 @@ code {
 .nft {
   user-select: none;
   max-width: 300px;
-  margin: 5rem auto;
+  margin: 1rem auto;
   border: 1px solid #ffffff22;
   background-color: #282c34;
   background: linear-gradient(0deg, rgb(53, 53, 53) 0%, rgba(184, 184, 184, 0.5) 100%);

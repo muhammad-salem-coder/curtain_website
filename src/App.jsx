@@ -56,9 +56,7 @@ function App() {
       <Spacer type="spacer layer-2"/>
 
       <Section color="beige" heading="Contact Us" id="contact_us">
-      <p><a onClick={() => { CopyToClipboard('contact'); return false; }} id="contact1-1">
-            +971 505810791
-        </a></p>
+      
       <p><a onClick={() => { CopyToClipboard('contact'); return false; }} id="contact1-2">
             +971 508679752
         </a></p>
