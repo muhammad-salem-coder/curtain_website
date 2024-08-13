@@ -97,6 +97,7 @@ section p {
 .white{
   background:#e1e1e1;
   color: rgb(61, 61, 61);
+  padding-bottom: 0px;
 }
 
 .grey{
@@ -163,7 +164,7 @@ section p {
   width: 90vw;
   position: left;
   color: rgb(61, 61, 61);
-  font-weight: 750;
+  font-weight: 1000;
   font-size: 500%;
   margin: 0px;
   padding: 0px;
