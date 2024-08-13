@@ -153,7 +153,7 @@ section p {
   padding: 170px 20vw;
   color: aliceblue;
 
-  background-image: url('./assets/images/decore1.png');
+  background-image: url('images/decore1.png');
   background-position: top right;
   background-size: auto 100%; 
   background-repeat: no-repeat;

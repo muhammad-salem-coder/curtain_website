@@ -18,28 +18,28 @@ function App() {
       
       <Section color="grey" heading='Our Services' id="our_services">
         <div class="row-card-sec">
-          <Cards image= "./src/assets/images/pic1.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic2.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic3.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic5.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic6.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic7.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic8.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic9.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic10.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic1.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic2.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic3.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic5.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic6.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic7.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic8.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic9.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic10.jpeg" header="Curtains & Blinds"/>
 
-          <Cards image= "./src/assets/images/pic11.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic12.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic13.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic14.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic15.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic16.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic17.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic18.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic20.jpeg " header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic21.jpeg " header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic22.jpeg " header="Curtains & Blinds"/>
-          <Cards image= "./src/assets/images/pic23.jpeg " header="Curtains & Blinds"/>
+          <Cards image= "images/pic11.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic12.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic13.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic14.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic15.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic16.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic17.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic18.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic20.jpeg " header="Curtains & Blinds"/>
+          <Cards image= "images/pic21.jpeg " header="Curtains & Blinds"/>
+          <Cards image= "images/pic22.jpeg " header="Curtains & Blinds"/>
+          <Cards image= "images/pic23.jpeg " header="Curtains & Blinds"/>
         </div>
       </Section>
       
@@ -72,7 +72,7 @@ function App() {
       <Spacer type="spacer layer-2-lower"/>
 
       <Section color="plain" heading="Our Clients" id="clients">
-        <img src="./src/assets/images/companies.png"></img>
+        <img src="images/companies.png"></img>
       </Section>
 
       <Spacer type="spacer layer-3"/>
