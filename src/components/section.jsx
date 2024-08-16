@@ -51,7 +51,7 @@ export function Footer(){
               <h4>Socials</h4>
               <ul className="links">
               <li><SocialIcon url="https://www.facebook.com/p/Alamasi-Curtains-and-Decor-100063547153505/" /></li>
-              <li><SocialIcon url="https://www.instagram.com/alamasidreamtextiles/" /></li>
+              <li><SocialIcon url="https://www.instagram.com/alamasidecor/" /></li>
               <li><SocialIcon url="https://wa.me/0508679752/" /></li>
 
               </ul>
