@@ -7,6 +7,7 @@ head, body, p, h1, h2, h3, h4, h5, h6{
 body{
   margin: 0px;
   background-color: black;
+  overflow-x: hidden;
 }
 
 html {
@@ -37,7 +38,7 @@ body::-webkit-scrollbar-thumb:hover {
   position: fixed; 
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   background-color: rgba(0, 0, 0, 0); 
   color: rgb(101, 101, 101);
   display: flex;
@@ -145,40 +146,65 @@ section p {
 }
 
 #intro {
-  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  min-height: 400px;
-  padding: 170px 20vw;
+  justify-content: space-between;
   color: aliceblue;
-
-  background-image: url('./assets/images/decore1.png');
-  background-position: top right;
-  background-size: auto 100%; 
-  background-repeat: no-repeat;
-  min-height: 500px; 
 }
 
-#intro-hd{
-  width: 90vw;
-  position: left;
+#sec1 {
+  flex: 1;
+  padding: 0 2%;
+}
+
+#sec2 {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#sec2 img {
+  height: 110vh; /* Adjust as needed */
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+#intro-hd {
   color: rgb(61, 61, 61);
-  font-weight: 1000;
-  font-size: 500%;
-  margin: 0px;
-  padding: 0px;
+  font-weight: 1200;
+  font-size: 5rem; /* Adjust font size as needed */
+  padding-left: 1vw;
+  margin: 0;
 }
 
-#intro-pr{
-  width: 90vw;
-}
-
-#intro p {
-  width: 50%;
+#intro-pr p {
   color: grey;
+  margin-top: 1rem;
+  width: 80%;
 }
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #intro {
+    flex-direction: row;
+  }
+
+  #sec1 {
+    padding-top: 40%;
+    padding-bottom: 25%;
+    padding-left: 6%;
+    text-align: center;
+  }
+
+  #sec2 {
+    display: none;
+  }
+
+  #intro-pr p {
+    width: 100%;
+  }
+}
 .row-card-sec{
   width: 66vw;
   display: flex;
@@ -387,8 +413,6 @@ display: flex;
   background-color: rgba(255, 255, 255, 0.267);
 }
 
-
-
 .app {
   display: flex;
   padding: 5rem;
@@ -431,6 +455,7 @@ display: flex;
   margin-top: 20px;
 }
 .footer-col .links li {
+  text-align: center;
   padding-right: 35px;
   list-style: none;
   margin-bottom: 10px;
@@ -523,3 +548,65 @@ display: flex;
   color: #696969;
 }
 
+
+@media (max-width: 768px) {
+  section {
+    padding: 20px 5vw;
+  }
+
+  #intro-hd {
+    font-size: 250%;
+    text-align: center;
+  }
+
+  #intro-pr {
+    width: 90vw;
+    text-align: center;
+  }
+
+  .row-card-sec {
+    width: 90vw;
+    justify-content: center;
+  }
+
+  .footer .footer-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-col .links {
+    padding: 0;
+  }
+
+  .footer-col {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  #intro-hd {
+    font-size: 200%;
+  }
+
+  .footer .footer-row {
+    padding: 10px;
+  }
+
+  section p {
+    font-size: 100%;
+  }
+
+  .row-card-sec {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-col h4 {
+    font-size: 1rem;
+  }
+}
+
+.companies_sec{
+  width: 100vw;
+}

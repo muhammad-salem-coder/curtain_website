@@ -6,13 +6,19 @@ function App() {
   return (
     <>
       <Navbar/>
-      <div className="white" id="intro">
-        <h1 id="intro-hd">Al Amasi Dream</h1>
-        <h1 id="intro-hd">Curtain & Décor</h1>
-        <div id="intro-pr">
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur temporibus optio, cumque quibusdam tenetur, qui architecto fugiat debitis perspiciatis quisquam obcaecati incidunt sequi iure voluptatibus, omnis consequatur neque. Consequatur, vel!</p>
+      <div class="white" id="intro">
+        <div id="sec1">
+          <h1 id="intro-hd">Al Amasi Dream</h1>
+          <h1 id="intro-hd">Curtain & Décor</h1>
+          <div id="intro-pr">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur temporibus optio, cumque quibusdam tenetur, qui architecto fugiat debitis perspiciatis quisquam obcaecati incidunt sequi iure voluptatibus, omnis consequatur neque. Consequatur, vel!</p>
+          </div>
+        </div>
+        <div id="sec2">
+          <img src="images/decore1.png" alt="Decor Image"></img>
         </div>
       </div>
+
 
       <Spacer type="spacer layer-1"/>
       
@@ -70,7 +76,7 @@ function App() {
       <Spacer type="spacer layer-2-lower"/>
 
       <Section color="plain" heading="Our Clients" id="clients">
-        <img src="images/companies.png"></img>
+        <img src="images/companies.png" className="companies_sec"></img>
       </Section>
 
       <Spacer type="spacer layer-3"/>

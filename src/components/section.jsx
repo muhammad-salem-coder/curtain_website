@@ -37,18 +37,23 @@ export function Footer(){
               <ul className="links">
               
                 <li>Contact</li>
-                <a onClick={() => { CopyToClipboard('contact2-2'); return false; }} id="contact2-2">
-                  +971 508679752  
-                </a>
+                <li>
+                  <a onClick={() => {CopyToClipboard('contact2-2'); return false; }} id="contact2-2">
+                    +971 508679752  
+                  </a>
+                </li>
+                <li>
                 <p id='click_to_copy'>Click to copy</p>
+                </li>
               </ul>
             </div>
             <div className="footer-col">
               <h4>Socials</h4>
               <ul className="links">
-                <li><SocialIcon url="www.facebook.com/p/Alamasi-Curtains-and-Decor-100063547153505/" /></li>
-                <li><SocialIcon url="www.instagram.com/alamasidreamtextiles/" /></li>
-                <li><SocialIcon url="https://wa.me/0508679752/" /></li>
+              <li><SocialIcon url="https://www.facebook.com/p/Alamasi-Curtains-and-Decor-100063547153505/" /></li>
+              <li><SocialIcon url="https://www.instagram.com/alamasidreamtextiles/" /></li>
+              <li><SocialIcon url="https://wa.me/0508679752/" /></li>
+
               </ul>
             </div>
           </div>
