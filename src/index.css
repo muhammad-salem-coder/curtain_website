@@ -38,11 +38,10 @@ body::-webkit-scrollbar-thumb:hover {
   position: fixed; 
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 97vw;
   background-color: rgba(0, 0, 0, 0); 
   color: rgb(101, 101, 101);
   display: flex;
-  justify-content: space-evenly;
   padding: 15px 0;
   z-index: 1000; 
 }
@@ -52,7 +51,7 @@ body::-webkit-scrollbar-thumb:hover {
   list-style: none;
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .navbar li{
@@ -181,7 +180,8 @@ section p {
 #intro-pr p {
   color: grey;
   margin-top: 1rem;
-  width: 80%;
+  width: 90%;
+  padding-left: 1vw;
 }
 
 /* Responsive adjustments */
@@ -609,4 +609,45 @@ display: flex;
 
 .companies_sec{
   width: 100vw;
+}
+
+#call-link{
+  text-decoration: none;
+  color: black;
+}
+
+#call-link :hover{
+  background: #c1af8b;
+}
+
+.call-btn{
+  transform: scale(300%);
+  background: #c8a55f;
+  position: fixed;
+  left: 95vw;
+  top: 90vh;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.call-btn :hover{
+  cursor: pointer;
+}
+
+.call-btn i {
+  transform: scale(60%);
+}
+
+select {
+  width: 20%;
+  padding: 1%;
+  border-radius: 10px;
+  font-family: "Poppins";
+  font-weight: 750;
+  background-color: grey;
+  border-color: grey;
+  color: white;
 }

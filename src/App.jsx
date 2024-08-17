@@ -1,11 +1,21 @@
 import { Cards } from "./components/cards";
-import { Navbar } from "./components/navbar";
+import { Navbar, CallButton } from "./components/navbar";
 import { Section, Footer, Spacer } from "./components/section";
+import { useState } from 'react';
 
 function App() {
+  const [selectedDiv, setSelectedDiv] = useState('1');
+
+  // Function to handle dropdown change
+  const handleChange = (event) => {
+    setSelectedDiv(event.target.value);
+  };
+
   return (
     <>
       <Navbar/>
+      <CallButton/>
+
       <div class="white" id="intro">
         <div id="sec1">
           <h1 id="intro-hd">Al Amasi Dream</h1>
@@ -23,7 +33,12 @@ function App() {
       <Spacer type="spacer layer-1"/>
       
       <Section color="grey" heading='Our Services' id="our_services">
-        <div class="row-card-sec">
+        <select id="div-select" onChange={handleChange} value={selectedDiv}>
+          <option className="options" value="1">Wallpapers</option>
+          <option className="options" value="2">Curtains</option>
+        </select>
+
+        <div class="row-card-sec" style={{ display: selectedDiv === '1' ? '' : 'none' }}>
           <Cards image= "images/pic1.jpeg" header="Curtains & Blinds"/>
           <Cards image= "images/pic2.jpeg" header="Curtains & Blinds"/>
           <Cards image= "images/pic3.jpeg" header="Curtains & Blinds"/>
@@ -33,7 +48,9 @@ function App() {
           <Cards image= "images/pic8.jpeg" header="Curtains & Blinds"/>
           <Cards image= "images/pic9.jpeg" header="Curtains & Blinds"/>
           <Cards image= "images/pic10.jpeg" header="Curtains & Blinds"/>
+        </div>
 
+        <div class="row-card-sec" style={{ display: selectedDiv === '2' ? '' : 'none' }}>
           <Cards image= "images/pic11.jpeg" header="Curtains & Blinds"/>
           <Cards image= "images/pic12.jpeg" header="Curtains & Blinds"/>
           <Cards image= "images/pic13.jpeg" header="Curtains & Blinds"/>
@@ -84,6 +101,7 @@ function App() {
       <Section color="dark" heading="">
         <Footer/>
       </Section>
+
     </>
   );
 }
