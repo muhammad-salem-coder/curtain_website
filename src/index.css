@@ -633,19 +633,19 @@ display: flex;
   background: #c1af8b;
 }
 
-.call-btn{
+.call-btn {
   transform: scale(300%);
   background: #c8a55f;
   position: fixed;
-  left: 95vw;
-  top: 90vh;
+  right: 40px; 
+  bottom: 40px; 
   border-radius: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  -webkit-backface-visibility: hidden;
 }
-
 .call-btn :hover{
   cursor: pointer;
 }
