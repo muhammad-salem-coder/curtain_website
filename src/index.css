@@ -44,29 +44,42 @@ body::-webkit-scrollbar-thumb:hover {
   display: flex;
   padding: 15px 0;
   z-index: 1000; 
+  overflow-x: auto; 
 }
-
 .navbar ul {
   font-weight: 750;
   list-style: none;
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  flex-wrap: nowrap; 
 }
 
-.navbar li{
+.navbar li {
   cursor: pointer;
+  white-space: nowrap; 
 }
 
-.navbar a{
+.navbar a {
   text-decoration: none;  
   color: grey;
 }
 
-
 .navbar li:hover {
   border-bottom: 5px solid rgb(101, 101, 101);
   border-radius: 5px 5px;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .navbar ul {
+    justify-content: space-between; /* Adjust spacing for smaller screens */
+  }
+
+  .navbar li {
+    font-size: 14px; /* Reduce font size */
+    padding: 10px; /* Adjust padding */
+  }
 }
 
 section{
