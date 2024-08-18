@@ -32,13 +32,11 @@ function App() {
 
       <Spacer type="spacer layer-1"/>
       
-      <Section color="grey" heading='Our Services' id="our_services">
-        <select id="div-select" onChange={handleChange} value={selectedDiv}>
-          <option className="options" value="1">Wallpapers</option>
-          <option className="options" value="2">Curtains</option>
-        </select>
-
-        <div class="row-card-sec" style={{ display: selectedDiv === '1' ? '' : 'none' }}>
+      <Section color="grey" heading='Our Services'>
+        
+        <br/>
+        <h2 id="curtains">Curtains</h2>
+        <div class="row-card-sec">
           <Cards image= "images/pic1.jpeg" header="Curtains & Blinds"/>
           <Cards image= "images/pic2.jpeg" header="Curtains & Blinds"/>
           <Cards image= "images/pic3.jpeg" header="Curtains & Blinds"/>
@@ -50,7 +48,9 @@ function App() {
           <Cards image= "images/pic10.jpeg" header="Curtains & Blinds"/>
         </div>
 
-        <div class="row-card-sec" style={{ display: selectedDiv === '2' ? '' : 'none' }}>
+        <br/><br/><br/>
+        <h2 id="wallpapers">Wallpapers</h2>
+        <div class="row-card-sec">
           <Cards image= "images/pic11.jpeg" header="Curtains & Blinds"/>
           <Cards image= "images/pic12.jpeg" header="Curtains & Blinds"/>
           <Cards image= "images/pic13.jpeg" header="Curtains & Blinds"/>
@@ -63,6 +63,20 @@ function App() {
           <Cards image= "images/pic21.jpeg " header="Curtains & Blinds"/>
           <Cards image= "images/pic22.jpeg " header="Curtains & Blinds"/>
           <Cards image= "images/pic23.jpeg " header="Curtains & Blinds"/>
+        </div>
+        
+        <br/><br/><br/>
+        <h2 id="painting">Painting</h2>
+        <div class="row-card-sec">
+          <Cards image= "images/pic1.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic2.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic3.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic5.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic6.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic7.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic8.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic9.jpeg" header="Curtains & Blinds"/>
+          <Cards image= "images/pic10.jpeg" header="Curtains & Blinds"/>
         </div>
       </Section>
       
