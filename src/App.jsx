@@ -11,12 +11,18 @@ function App() {
     setSelectedDiv(event.target.value);
   };
 
+  // Import images from the public folder using Vite's import.meta.glob
+  const curtain_images = import.meta.glob('/public/images/curtain/*.{png,jpg,jpeg,svg}', { eager: true });
+  const parquet_images = import.meta.glob('/public/images/parquet/*.{png,jpg,jpeg,svg}', { eager: true });
+  const wallpaper_images = import.meta.glob('/public/images/wallpaper/*.{png,jpg,jpeg,svg}', { eager: true });
+  const sofachairs_images = import.meta.glob('/public/images/sofachairs/*.{png,jpg,jpeg,svg}', { eager: true });
+
   return (
     <>
-      <Navbar/>
-      <CallButton/>
+      <Navbar />
+      <CallButton />
 
-      <div class="white" id="intro">
+      <div className="white" id="intro">
         <div id="sec1">
           <h1 id="intro-hd">Al Amasi Dream</h1>
           <h1 id="intro-hd">Curtain & Décor</h1>
@@ -25,101 +31,90 @@ function App() {
           </div>
         </div>
         <div id="sec2">
-          <img src="images/decore1.png" alt="Decor Image"></img>
+          <img src="/images/decore1.png" alt="Decor Image"></img>
         </div>
       </div>
 
+      <Spacer type="spacer layer-1" />
 
-      <Spacer type="spacer layer-1"/>
-      
-      <Section color="grey" heading='Our Services'>
-        
+      <Section color="grey" heading="Our Services">
         <br/>
-        <h2 id="curtains">Curtains</h2>
-        <div class="row-card-sec">
-          <Cards image= "images/pic1.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic2.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic3.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic5.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic6.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic7.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic8.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic9.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic10.jpeg" header="Curtains & Blinds"/>
+        <h2 id="curtains">Curtains & Blinds</h2>
+        <div className="row-card-sec">
+          {
+            Object.keys(curtain_images).map((imgPath, i) => (
+              <Cards key={i} image={imgPath} header="Curtains & Blinds" />
+            ))
+          }
         </div>
 
-        <br/><br/><br/>
+        <br /><br /><br />
         <h2 id="wallpapers">Wallpapers</h2>
-        <div class="row-card-sec">
-          <Cards image= "images/pic11.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic12.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic13.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic14.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic15.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic16.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic17.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic18.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic20.jpeg " header="Curtains & Blinds"/>
-          <Cards image= "images/pic21.jpeg " header="Curtains & Blinds"/>
-          <Cards image= "images/pic22.jpeg " header="Curtains & Blinds"/>
-          <Cards image= "images/pic23.jpeg " header="Curtains & Blinds"/>
+        <div className="row-card-sec">
+          {
+            Object.keys(wallpaper_images).map((imgPath, i) => (
+              <Cards key={i} image={imgPath} header="Wallpapers" />
+            ))
+          }
         </div>
-        
-        <br/><br/><br/>
-        <h2 id="painting">Painting</h2>
-        <div class="row-card-sec">
-          <Cards image= "images/pic1.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic2.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic3.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic5.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic6.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic7.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic8.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic9.jpeg" header="Curtains & Blinds"/>
-          <Cards image= "images/pic10.jpeg" header="Curtains & Blinds"/>
+
+        <br /><br /><br />
+        <h2 id="sofachair">Sofa & Chair Works</h2>
+        <div className="row-card-sec">
+          {
+            Object.keys(sofachairs_images).map((imgPath, i) => (
+              <Cards key={i} image={imgPath} header="Sofa & Chair Works" />
+            ))
+          }
+        </div>
+
+        <br /><br /><br />
+        <h2 id="parquet">Parquet</h2>
+        <div className="row-card-sec">
+          {
+            Object.keys(parquet_images).map((imgPath, i) => (
+              <Cards key={i} image={imgPath} header="Parquet" />
+            ))
+          }
         </div>
       </Section>
-      
-      <Spacer type="spacer layer-1-lower"/>
+
+      <Spacer type="spacer layer-1-lower" />
 
       <Section color="white" heading="About Us" id="about_us">
         <p>
           We have wide range of home decor items including Wall Decor, Table Decor, Table Utilities
-          ,fixing and repairing of curtains, carpets, flooring, wall paper, blinds, shutters, room 
+          ,fixing and repairing of curtains, carpets, flooring, wall paper, blinds, shutters, room
           decor, glass tints, painting, ceiling, lighting, partition of rooms.
         </p>
       </Section>
 
-      <Spacer type="spacer layer-2"/>
+      <Spacer type="spacer layer-2" />
 
       <Section color="beige" heading="Contact Us" id="contact_us">
-      
-      <p><a onClick={() => { CopyToClipboard('contact'); return false; }} id="contact1-2">
-            +971 508679752
+        <p><a onClick={() => { CopyToClipboard('contact'); return false; }} id="contact1-2">
+          +971 508679752
         </a></p>
-        
-        <p>Hamad Center<br/>
-        2nd Floor - Shop No. 85 Electra Street<br/>
-        Near NMC Hospital - Al Danah - Zone 1<br/>
-        Abu Dhabi, United Arab Emirates<br/></p>
+
+        <p>Hamad Center<br />
+          2nd Floor - Shop No. 85 Electra Street<br />
+          Near NMC Hospital - Al Danah - Zone 1<br />
+          Abu Dhabi, United Arab Emirates<br /></p>
       </Section>
 
-      <Spacer type="spacer layer-2-lower"/>
+      <Spacer type="spacer layer-2-lower" />
 
       <Section color="plain" heading="Our Clients" id="clients">
-        <img src="images/companies.png" className="companies_sec"></img>
+        <img src="/images/companies.png" className="companies_sec"></img>
       </Section>
 
-      <Spacer type="spacer layer-3"/>
+      <Spacer type="spacer layer-3" />
 
       <Section color="dark" heading="">
-        <Footer/>
+        <Footer />
       </Section>
-
     </>
   );
 }
-
-// royal m hotel, pearl rotana, , little heaven
 
 export default App;
