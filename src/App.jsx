@@ -12,10 +12,10 @@ function App() {
   };
 
   // Import images from the public folder using Vite's import.meta.glob
-  const curtain_images = import.meta.glob('/assets/images/curtain/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
-  const parquet_images = import.meta.glob('/assets/images/parquet/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
-  const wallpaper_images = import.meta.glob('/assets/images/wallpaper/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
-  const sofachairs_images = import.meta.glob('/assets/images/sofachairs/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
+  const curtain_images = import.meta.glob('assets/images/curtain/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
+  const parquet_images = import.meta.glob('assets/images/parquet/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
+  const wallpaper_images = import.meta.glob('assets/images/wallpaper/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
+  const sofachairs_images = import.meta.glob('assets/images/sofachairs/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
 
   return (
     <>
