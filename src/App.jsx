@@ -12,10 +12,6 @@ function App() {
   };
 
   // Import images from the public folder using Vite's import.meta.glob
-  const curtain_images = import.meta.glob('assets/images/curtain/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
-  const parquet_images = import.meta.glob('assets/images/parquet/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
-  const wallpaper_images = import.meta.glob('assets/images/wallpaper/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
-  const sofachairs_images = import.meta.glob('assets/images/sofachairs/*.{png,jpg,jpeg,svg}', { eager: true, as: 'url' });
 
   return (
     <>
@@ -27,7 +23,8 @@ function App() {
           <h1 id="intro-hd">Al Amasi Dream</h1>
           <h1 id="intro-hd">Curtain & Décor</h1>
           <div id="intro-pr">
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur temporibus optio, cumque quibusdam tenetur, qui architecto fugiat debitis perspiciatis quisquam obcaecati incidunt sequi iure voluptatibus, omnis consequatur neque. Consequatur, vel!</p>
+            <p style={{fontStyle: "italic"}}>"Elevate your space with style - Premier Curtains and Décor for Homes and Businesses in Abu Dhabi. "</p>
+            <p style={{}}>Experts in supply, installation, and repair of curtains, carpets, wallpapers, carpets, wooding flooring, gypsum works, sofas, blinds, shutters, and more. From painting to room partitions, we got all your interior needs covered.</p>
           </div>
         </div>
         <div id="sec2">
@@ -41,41 +38,58 @@ function App() {
         <br/>
         <h2 id="curtains">Curtains & Blinds</h2>
         <div className="row-card-sec">
-          {
-            Object.keys(curtain_images).map((imgPath, i) => (
-              <Cards key={i} image={imgPath} header="Curtains & Blinds" />
-            ))
-          }
+        <Cards image='/images/curtain/blinds3.png' header="Parquet" />
+          <Cards image='/images/curtain/pic1.jpeg' header="Parquet" />
+          <Cards image='/images/curtain/pic02.jpg' header="Parquet" />
+          <Cards image='/images/curtain/pic4.jpeg' header="Parquet" />
+          <Cards image='/images/curtain/pic04.jpg' header="Parquet" />
+          <Cards image='/images/curtain/pic5.jpeg' header="Parquet" />
+          <Cards image='/images/curtain/pic7.jpeg' header="Parquet" />
+          <Cards image='/images/curtain/pic10.jpeg' header="Parquet" />
+          <Cards image='/images/curtain/pic11.jpeg' header="Parquet" />
+          <Cards image='/images/curtain/pic13.jpeg' header="Parquet" />
+          <Cards image='/images/curtain/pic15.jpeg' header="Parquet" />
+          <Cards image='/images/curtain/pic17.jpeg' header="Parquet" />
+          <Cards image='/images/curtain/pic19.jpeg' header="Parquet" />
+          <Cards image='/images/curtain/pic20.png' header="Parquet" />
+          <Cards image='/images/curtain/pic21.png' header="Parquet" />
         </div>
 
         <br /><br /><br />
         <h2 id="wallpapers">Wallpapers</h2>
         <div className="row-card-sec">
-          {
-            Object.keys(wallpaper_images).map((imgPath, i) => (
-              <Cards key={i} image={imgPath} header="Wallpapers" />
-            ))
-          }
+          <Cards image='/images/wallpaper/images (1).jpg' header="Wallpapers"/>
+          <Cards image='/images/wallpaper/images.jpg' header="Wallpapers"/>
+          <Cards image='/images/wallpaper/pic03.jpg' header="Wallpapers"/>
+          <Cards image='/images/wallpaper/pic05.jpg' header="Wallpapers"/>
+          <Cards image='/images/wallpaper/pic6.png' header="Wallpapers"/>
+          <Cards image='/images/wallpaper/wallpaper3.png' header="Wallpapers"/>
+
         </div>
 
         <br /><br /><br />
         <h2 id="sofachair">Sofa & Chair Works</h2>
         <div className="row-card-sec">
-          {
-            Object.keys(sofachairs_images).map((imgPath, i) => (
-              <Cards key={i} image={imgPath} header="Sofa & Chair Works" />
-            ))
-          }
+          <Cards image='/images/sofachairs/pic2.jpeg' header="Sofa & Chair Works"/>
+          <Cards image='/images/sofachairs/pic3.jpeg' header="Sofa & Chair Works"/>
+          <Cards image='/images/sofachairs/pic6.jpeg' header="Sofa & Chair Works"/>
+          <Cards image='/images/sofachairs/pic8.jpeg' header="Sofa & Chair Works"/>
+          <Cards image='/images/sofachairs/pic9.jpeg' header="Sofa & Chair Works"/>
+          <Cards image='/images/sofachairs/pic12.jpeg' header="Sofa & Chair Works"/>
+          <Cards image='/images/sofachairs/pic14.jpeg' header="Sofa & Chair Works"/>
+          <Cards image='/images/sofachairs/pic16.jpeg' header="Sofa & Chair Works"/>
+          <Cards image='/images/sofachairs/pic18.jpeg' header="Sofa & Chair Works"/>
+          <Cards image='/images/sofachairs/pic21.jpeg' header="Sofa & Chair Works"/>
+          <Cards image='/images/sofachairs/pic22.jpeg' header="Sofa & Chair Works"/>
+          <Cards image='/images/sofachairs/sofa123.png' header="Sofa & Chair Works"/>
         </div>
 
         <br /><br /><br />
         <h2 id="parquet">Parquet</h2>
         <div className="row-card-sec">
-          {
-            Object.keys(parquet_images).map((imgPath, i) => (
-              <Cards key={i} image={imgPath} header="Parquet" />
-            ))
-          }
+          <Cards image='/images/parquet/pic07.jpg' header="Parquet"/>
+          <Cards image='/images/parquet/pic23.jpeg' header="Parquet"/>
+          <Cards image='/images/parquet/pic24.jpg' header="Parquet"/>
         </div>
       </Section>
 
