@@ -18,7 +18,7 @@ export function Navbar(){
                             <li><a href="#curtains" onClick={toggleDropDown}>Curtains</a></li>
                             <li><a href="#wallpapers" onClick={toggleDropDown}>Wallpapers</a></li>
                             <li><a href="#sofachair" onClick={toggleDropDown}>Sofa/Chair</a></li>
-                            <li><a href="#parquet" onClick={toggleDropDown}>Parquet</a></li>
+                            <li><a href="#parquet" onClick={toggleDropDown}>National Day</a></li>
                         </ul>
                     )}
                 </li>

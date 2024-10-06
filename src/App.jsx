@@ -85,11 +85,11 @@ function App() {
         </div>
 
         <br /><br /><br />
-        <h2 id="parquet">Parquet</h2>
+        <h2 id="parquet">UAE National Day</h2>
         <div className="row-card-sec">
-          <Cards image='/images/parquet/pic07.jpg' header="Parquet"/>
-          <Cards image='/images/parquet/pic23.jpeg' header="Parquet"/>
-          <Cards image='/images/parquet/pic24.jpg' header="Parquet"/>
+          <Cards image='/images/uaenday/uaenday1.png' header="Parquet"/>
+          <Cards image='/images/uaenday/uaenday2.png' header="Parquet"/>
+          <Cards image='/images/uaenday/uaenday3.png' header="Parquet"/>
         </div>
       </Section>
 
