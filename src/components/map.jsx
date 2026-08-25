@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const AnyReactComponent = ({ text }) => <div>SDFSDFDSFS</div>;
+const AnyReactComponent = () => <div>Google Map</div>;
 
 class GoogleMap extends Component {
   constructor(props){
