@@ -1,3 +1,11 @@
+/**
+ * Files in public/ are not rewritten by Vite when referenced from JS strings,
+ * so paths must carry the deployment base themselves ('/' in dev,
+ * '/curtain_website/' in the GitHub Pages build).
+ */
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+export const asset = (path) => `${BASE}${path}`;
+
 export const BUSINESS = {
   name: "Al Amasi Dream",
   tagline: "Curtain & Décor",
@@ -28,7 +36,7 @@ export function whatsappLink({ service, scope }) {
   return `https://wa.me/${BUSINESS.whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`;
 }
 
-export const HERO_IMAGE = "/images/curtain/pic5.jpeg";
+export const HERO_IMAGE = asset("/images/curtain/pic5.jpeg");
 
 /** The four numbered points in the editorial grid. */
 export const HIGHLIGHTS = [
@@ -163,3 +171,10 @@ export const SERVICES = [
     ],
   },
 ];
+
+// Resolve every image path in the data above against the deployment base.
+for (const item of HIGHLIGHTS) item.image = asset(item.image);
+for (const service of SERVICES) {
+  service.image = asset(service.image);
+  for (const shot of service.gallery) shot.src = asset(shot.src);
+}

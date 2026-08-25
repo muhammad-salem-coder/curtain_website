@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BUSINESS, SERVICES } from "../data/site";
+import { asset, BUSINESS, SERVICES } from "../data/site";
 
 export function Navbar({ onPickService }) {
   const [open, setOpen] = useState(false);
@@ -22,7 +22,7 @@ export function Navbar({ onPickService }) {
   return (
     <header className={`nav ${scrolled ? "is-scrolled" : ""}`}>
       <a className="nav__brand" href="#top">
-        <img src="/images/logo.png" alt={`${BUSINESS.name} ${BUSINESS.tagline}`} />
+        <img src={asset("/images/logo.png")} alt={`${BUSINESS.name} ${BUSINESS.tagline}`} />
       </a>
 
       <nav className={`nav__links ${open ? "is-open" : ""}`}>

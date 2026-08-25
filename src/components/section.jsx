@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SocialIcon } from "react-social-icons";
-import { BUSINESS } from "../data/site";
+import { asset, BUSINESS } from "../data/site";
 
 export function Section({ id, className = "", eyebrow, heading, lead, children }) {
   return (
@@ -46,7 +46,7 @@ export function Footer() {
     <footer className="footer" id="contact">
       <div className="footer__grid">
         <div className="footer__brand">
-          <img src="/images/logo.png" alt="" />
+          <img src={asset("/images/logo.png")} alt="" />
           <p>
             {BUSINESS.name} {BUSINESS.tagline} — curtains, blinds, wallpapers,
             upholstery and flooring across Abu Dhabi and the Emirates.

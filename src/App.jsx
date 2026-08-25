@@ -3,7 +3,7 @@ import { Gallery } from "./components/cards";
 import { Hero } from "./components/hero";
 import { CallButton, Navbar } from "./components/navbar";
 import { CopyPhone, Footer, Section } from "./components/section";
-import { BUSINESS, HIGHLIGHTS, SERVICES, whatsappLink } from "./data/site";
+import { asset, BUSINESS, HIGHLIGHTS, SERVICES, whatsappLink } from "./data/site";
 
 function Highlights() {
   return (
@@ -35,7 +35,7 @@ function Highlights() {
 function FeatureBand() {
   return (
     <section className="band">
-      <img src="/images/curtain/pic1.jpeg" alt="Pleated drapes with tie-backs layered over sheers in a bedroom" loading="lazy" />
+      <img src={asset("/images/curtain/pic1.jpeg")} alt="Pleated drapes with tie-backs layered over sheers in a bedroom" loading="lazy" />
       <div className="band__card">
         <span className="band__icon">
           <i className="fa-solid fa-ruler-combined" aria-hidden="true" />
@@ -131,7 +131,7 @@ function App() {
         </Section>
 
         <section className="about" id="about">
-          <img src="/images/decore1.png" alt="Draped curtain beside a cane armchair" loading="lazy" />
+          <img src={asset("/images/decore1.png")} alt="Draped curtain beside a cane armchair" loading="lazy" />
           <div className="about__body">
             <p className="eyebrow">About us</p>
             <h2>Abu Dhabi&rsquo;s décor workshop since day one</h2>
@@ -147,7 +147,7 @@ function App() {
         </section>
 
         <Section id="clients" className="block--clients" eyebrow="Trusted by" heading="Our clients">
-          <img className="clients__strip" src="/images/companies.png" alt="Logos of companies we have worked with" loading="lazy" />
+          <img className="clients__strip" src={asset("/images/companies.png")} alt="Logos of companies we have worked with" loading="lazy" />
         </Section>
 
         <Section id="visit" className="block--visit" eyebrow="Contact" heading="Come and see the fabrics">
