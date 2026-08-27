@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import { asset, BUSINESS } from "../data/site";
+import { PAGE_META } from "../data/page-meta";
+import { pageUrl } from "../data/services";
 
 export function Section({ id, className = "", eyebrow, heading, lead, children }) {
   return (
@@ -46,7 +48,7 @@ export function Footer() {
     <footer className="footer" id="contact">
       <div className="footer__grid">
         <div className="footer__brand">
-          <img src={asset("/images/logo.png")} alt="" />
+          <img src={asset("/images/logo.png")} alt="" width="118" height="60" />
           <p>
             {BUSINESS.name} {BUSINESS.tagline} — curtains, blinds, wallpapers,
             upholstery and flooring across Abu Dhabi and the Emirates.
@@ -68,12 +70,12 @@ export function Footer() {
         </div>
 
         <div className="footer__col">
-          <h4>Explore</h4>
-          <a href="#top">Home</a>
-          <a href="#why">Why us</a>
-          <a href="#services">Services</a>
-          <a href="#work">Our Work</a>
-          <a href="#about">About</a>
+          <h4>Our services</h4>
+          {PAGE_META.map((page) => (
+            <a key={page.slug} href={pageUrl(page.slug)}>
+              {page.nav}
+            </a>
+          ))}
         </div>
 
         <div className="footer__col">
@@ -81,6 +83,7 @@ export function Footer() {
           {BUSINESS.address.map((line) => (
             <p key={line}>{line}</p>
           ))}
+          <p>P.O. Box 13074</p>
         </div>
 
         <div className="footer__col">
@@ -90,6 +93,7 @@ export function Footer() {
           <a href={`https://wa.me/${BUSINESS.whatsapp}`} target="_blank" rel="noreferrer">
             Message on WhatsApp
           </a>
+          <a href="mailto:alamasidream@gmail.com">alamasidream@gmail.com</a>
         </div>
       </div>
 

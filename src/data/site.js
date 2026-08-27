@@ -120,8 +120,6 @@ export const SERVICES = [
       { src: "/images/wallpaper/pic6.png", alt: "Patterned wallpaper across a living room wall" },
       { src: "/images/wallpaper/pic03.jpg", alt: "Wallpaper detail showing surface texture" },
       { src: "/images/wallpaper/pic05.jpg", alt: "Wallpaper feature wall behind furniture" },
-      { src: "/images/wallpaper/images (1).jpg", alt: "Wallpaper pattern sample" },
-      { src: "/images/wallpaper/images.jpg", alt: "Wallpaper pattern sample" },
     ],
   },
   {

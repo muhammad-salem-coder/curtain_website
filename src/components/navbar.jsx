@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
-import { asset, BUSINESS, SERVICES } from "../data/site";
+import { Icon } from "./icon";
+import { asset, BUSINESS, whatsappLink } from "../data/site";
+import { PAGE_META } from "../data/page-meta";
+import { pageUrl } from "../data/services";
 
-export function Navbar({ onPickService }) {
+/**
+ * `active` is the slug of the service page currently being viewed, or undefined
+ * on the homepage. Links are rooted at "/" so the same nav works from a service
+ * page as from the homepage — on the homepage "/#work" is still treated as a
+ * same-document fragment jump, so smooth scrolling is unaffected.
+ */
+export function Navbar({ active }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -12,28 +21,32 @@ export function Navbar({ onPickService }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Native anchor navigation does the scrolling (honouring scroll-padding-top);
-  // the click handler only selects which gallery the #work section shows.
-  const go = (id) => () => {
-    setOpen(false);
-    onPickService?.(id);
-  };
+  const close = () => setOpen(false);
 
   return (
     <header className={`nav ${scrolled ? "is-scrolled" : ""}`}>
-      <a className="nav__brand" href="#top">
-        <img src={asset("/images/logo.png")} alt={`${BUSINESS.name} ${BUSINESS.tagline}`} />
+      <a className="nav__brand" href="/">
+        <img
+          src={asset("/images/logo.png")}
+          alt={`${BUSINESS.name} ${BUSINESS.tagline}`}
+          width="118"
+          height="60"
+        />
       </a>
 
       <nav className={`nav__links ${open ? "is-open" : ""}`}>
-        <a href="#work" onClick={() => setOpen(false)}>Our Work</a>
-        {SERVICES.map((service) => (
-          <a key={service.id} href="#work" onClick={go(service.id)}>
-            {service.name}
+        {PAGE_META.map((page) => (
+          <a
+            key={page.slug}
+            href={pageUrl(page.slug)}
+            className={page.slug === active ? "is-current" : ""}
+            aria-current={page.slug === active ? "page" : undefined}
+            onClick={close}
+          >
+            {page.nav}
           </a>
         ))}
-        <a href="#about" onClick={() => setOpen(false)}>About</a>
-        <a href="#visit" onClick={() => setOpen(false)}>Visit us</a>
+        <a href="/#visit" onClick={close}>Visit us</a>
       </nav>
 
       <div className="nav__actions">
@@ -42,7 +55,7 @@ export function Navbar({ onPickService }) {
           href={BUSINESS.phoneHref}
           aria-label={`Call us on ${BUSINESS.phone}`}
         >
-          <i className="fa-solid fa-phone" aria-hidden="true" /> Contact
+          <Icon name="phone" /> <span className="nav__cta-label">Contact</span>
         </a>
 
         <button
@@ -51,23 +64,24 @@ export function Navbar({ onPickService }) {
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
         >
-          <i className={`fa-solid ${open ? "fa-xmark" : "fa-bars"}`} aria-hidden="true" />
+          <Icon name={open ? "xmark" : "bars"} />
         </button>
       </div>
     </header>
   );
 }
 
-export function CallButton() {
+/** Floating WhatsApp button. `service` pre-fills the message on service pages. */
+export function CallButton({ service }) {
   return (
     <a
       className="float-call"
-      href={`https://wa.me/${BUSINESS.whatsapp}`}
+      href={service ? whatsappLink({ service }) : `https://wa.me/${BUSINESS.whatsapp}`}
       target="_blank"
       rel="noreferrer"
       aria-label="Message us on WhatsApp"
     >
-      <i className="fa-brands fa-whatsapp" aria-hidden="true" />
+      <Icon name="whatsapp" />
     </a>
   );
 }

@@ -1,4 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap");
+/* Self-hosted Inter and Inter Tight (latin subset, variable weight).
+   Google Fonts served these from fonts.gstatic.com at VeryHigh priority over a
+   second origin, so first paint waited on an extra DNS + TLS handshake and a
+   stylesheet round trip. Same bytes, same origin, one hop.
+   Refresh with the URLs in scripts/README-fonts.md if the family is updated. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/inter-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter Tight";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/inter-tight-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 /* ---------------------------------------------------------- tokens */
 :root {
@@ -10,6 +34,9 @@
   --line: #e3daca;
   --accent: #b08a44;
   --accent-deep: #93712f;
+  /* Deep enough for white small-caps labels to clear 4.5:1 on the CTA buttons;
+     --accent itself is only 3.2:1 against white. */
+  --accent-cta: #8d6c2c;
   --dark: #201d18;
   --dark-2: #2a2620;
 
@@ -56,6 +83,14 @@ h3 { font-size: clamp(1.15rem, 1.7vw, 1.5rem); }
 
 p { margin: 0; }
 img { display: block; max-width: 100%; }
+
+/* <picture> wraps every photo now (src/components/picture.jsx). display:contents
+   removes it from the box tree so the <img> keeps participating in the parent
+   grid/flex exactly as it did when it was a direct child. */
+picture { display: contents; }
+
+/* Inline SVG replacements for the old Font Awesome glyphs. */
+.icon { width: 1em; height: 1em; flex: none; vertical-align: -0.125em; }
 ul { margin: 0; padding: 0; list-style: none; }
 
 button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
@@ -277,42 +312,6 @@ body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 .enquiry__title { font-size: 1.3rem; color: #fff; }
 .enquiry__sub { font-size: 0.86rem; color: rgba(255, 255, 255, 0.66); margin-bottom: 4px; }
 
-/* Phone-first CTA replacing the old select-based form. */
-.enquiry__phone {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 16px 18px;
-  margin-top: 4px;
-  border-radius: var(--r-md);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #fff;
-  text-decoration: none;
-  transition: background 0.18s ease, transform 0.18s ease;
-}
-.enquiry__phone:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-1px); }
-.enquiry__phone-label {
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-}
-.enquiry__phone-number {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: "Inter Tight", sans-serif;
-  font-size: clamp(1.2rem, 1.6vw, 1.45rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-}
-.enquiry__phone-number i { font-size: 0.85em; }
-
-.enquiry__links { display: flex; gap: 8px; }
-.enquiry__links .btn { flex: 1; padding: 11px 14px; font-size: 0.88rem; }
-
 .btn--ghost {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.22);
@@ -391,7 +390,7 @@ body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
   border-radius: var(--r-lg);
   overflow: hidden;
 }
-.band > img { width: 100%; height: clamp(320px, 46vw, 560px); object-fit: cover; }
+.band > picture > img { width: 100%; height: clamp(320px, 46vw, 560px); object-fit: cover; }
 .band__card {
   position: absolute;
   left: clamp(16px, 3vw, 40px);
@@ -587,7 +586,7 @@ body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
 }
-.about > img { width: 100%; height: 100%; max-height: 520px; object-fit: cover; }
+.about > picture > img { width: 100%; height: 100%; max-height: 520px; object-fit: cover; }
 .about__body {
   display: flex;
   flex-direction: column;
@@ -695,6 +694,263 @@ body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 }
 .float-call:hover { transform: scale(1.07); }
 
+
+/* ---------------------------------------------------------- contact CTA
+   Used by both the homepage measure card and every service lander. Sized so
+   the pair clears 44px tap targets and lands above the fold at 390px, which
+   is the viewport almost every local search arrives on. */
+.cta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 10px;
+  margin-top: 4px;
+  width: 100%;
+  max-width: 460px;
+}
+.cta__btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 62px;
+  padding: 12px 18px;
+  border-radius: var(--r-md);
+  text-decoration: none;
+  font-family: "Inter Tight", sans-serif;
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+.cta__btn span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  font-weight: 600;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+.cta__btn small {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.cta__btn .icon { width: 1.35rem; height: 1.35rem; }
+.cta__btn--call { background: var(--accent-cta); color: #fff; }
+.cta__btn--call:hover { background: #7a5c25; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+/* Keeps the recognisable WhatsApp green by darkening the text rather than the
+   brand colour - ink on #25d366 is 8.7:1. */
+.cta__btn--wa { background: #25d366; color: var(--ink); }
+.cta__btn--wa:hover { background: #2ee070; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+/* ---------------------------------------------------------- service lander
+   Shorter than the homepage hero so the H1, the city and both contact buttons
+   fit in one phone screen. The nav is fixed inside this box exactly as it is
+   inside .hero, so the lander must stay the first child of .page. */
+.lander {
+  position: relative;
+  min-height: min(72vh, 680px);
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(96px, 13vh, 150px) clamp(20px, 3.4vw, 52px) clamp(28px, 4vw, 52px);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.lander--plain {
+  background: linear-gradient(135deg, var(--dark) 0%, #3a2e1d 58%, var(--dark-2) 100%);
+}
+.lander__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.lander__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20, 17, 12, 0.9) 0%, rgba(20, 17, 12, 0.45) 56%, rgba(20, 17, 12, 0.62) 100%);
+}
+.lander__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 760px;
+  color: #fff;
+}
+.lander__inner h1 { color: #fff; max-width: 17ch; }
+.lander__lead { color: rgba(255, 255, 255, 0.82); max-width: 56ch; font-size: clamp(0.98rem, 1.2vw, 1.08rem); }
+.lander__note { font-size: 0.82rem; color: rgba(255, 255, 255, 0.62); }
+
+/* ---------------------------------------------------------- service grid */
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+  gap: var(--gap);
+}
+.svc-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.svc-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+/* aspect-ratio alone - pairing it with min-height makes height drive width and
+   overflows the narrow grid columns. */
+.svc-card__media { aspect-ratio: 4 / 3; overflow: hidden; background: var(--bg-2); }
+.svc-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.svc-card:hover .svc-card__media img { transform: scale(1.04); }
+.svc-card__placeholder {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--bg-2) 0%, var(--line) 100%);
+}
+.svc-card__body { display: flex; flex-direction: column; gap: 8px; padding: clamp(16px, 1.8vw, 22px); }
+.svc-card__body p { color: var(--muted); font-size: 0.92rem; }
+.svc-card__go {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  color: var(--accent);
+  font-family: "Inter Tight", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ---------------------------------------------------------- service page body */
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 74ch;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.1vw, 1.06rem);
+}
+
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+  gap: var(--gap);
+}
+.offer-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(18px, 2vw, 26px);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.offer-card p { color: var(--muted); font-size: 0.93rem; }
+.offer-card__tick {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(176, 138, 68, 0.14);
+  color: var(--accent);
+}
+.offer-card__tick .icon { width: 1.05rem; height: 1.05rem; }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: var(--gap);
+}
+.steps__item {
+  display: flex;
+  gap: 14px;
+  padding: clamp(16px, 1.8vw, 22px);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.steps__n {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-family: "Inter Tight", sans-serif;
+  font-weight: 600;
+}
+.steps__item p { color: var(--muted); font-size: 0.92rem; margin-top: 6px; }
+
+.turnaround {
+  margin-top: var(--gap);
+  padding: clamp(20px, 2.4vw, 30px);
+  border-radius: var(--r-md);
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+}
+.turnaround p { color: var(--muted); margin-top: 8px; max-width: 74ch; }
+
+.claims {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 225px), 1fr));
+  gap: var(--gap);
+}
+.claims__item {
+  padding: clamp(18px, 2vw, 26px);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+}
+.claims__item p { color: var(--muted); font-size: 0.92rem; margin-top: 8px; }
+
+.related {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 12px;
+}
+.related__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 62px;
+  padding: 16px 20px;
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+  font-family: "Inter Tight", sans-serif;
+  font-weight: 600;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+.related__card:hover { background: var(--bg-2); transform: translateY(-2px); }
+.related__card h3 { font-size: 1rem; font-weight: 600; }
+.related__card .icon { color: var(--accent); width: 1.1rem; height: 1.1rem; }
+
+.gallery-note { margin-top: 16px; font-size: 0.92rem; color: var(--muted); }
+.gallery-note--solo {
+  margin-top: 0;
+  padding: clamp(20px, 2.4vw, 30px);
+  border-radius: var(--r-md);
+  background: var(--bg-2);
+  border: 1px dashed var(--line);
+  max-width: 62ch;
+}
+
+/* ---------------------------------------------------------- contact blocks */
+.visit__card h3 { display: flex; align-items: center; gap: 9px; }
+.visit__card h3 .icon { color: var(--accent); }
+.visit__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.visit__actions .btn { min-height: 48px; }
+.btn--ghost-dark { background: transparent; border: 1px solid var(--line); color: var(--ink); }
+.btn--ghost-dark:hover { background: var(--bg-2); transform: translateY(-1px); }
+.visit__mail a { color: var(--muted); font-size: 0.92rem; }
+
+.nav__links a.is-current { color: var(--accent); }
+/* Keeps footer and nav links clear of the 44px tap-target minimum. */
+.footer__col a { display: inline-flex; align-items: center; min-height: 40px; }
+
 /* ---------------------------------------------------------- responsive */
 @media (max-width: 1200px) {
   .nav__links { display: none; }
@@ -727,13 +983,16 @@ body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
   .why__grid { grid-template-columns: minmax(0, 1fr); }
   .offer { grid-template-columns: minmax(0, 1fr); }
   .about { grid-template-columns: minmax(0, 1fr); }
-  .about > img { max-height: 300px; }
+  .about > picture > img { max-height: 300px; }
   .footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 620px) {
-  .nav__cta span, .nav__cta { font-size: 0; padding: 0; width: 42px; height: 42px; border-radius: 50%; }
-  .nav__cta i { font-size: 0.95rem; }
+  .cta { grid-template-columns: minmax(0, 1fr); max-width: none; }
+  .lander { min-height: min(76vh, 640px); }
+  .nav__cta { padding: 0; width: 44px; height: 44px; border-radius: 50%; }
+  .nav__cta-label { display: none; }
+  .nav__cta .icon { width: 1.05rem; height: 1.05rem; }
   .why__pair { grid-template-columns: minmax(0, 1fr); }
   .why__pair:nth-child(3) .why__figure,
   .why__pair:nth-child(4) .why__figure { order: 0; }

@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Pristine font downloads, kept only so scripts/subset-fonts.sh can re-run.
+scripts/.fonts-src/

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { Icon } from "./icon";
+import { Picture } from "./picture";
 
 /** A single gallery tile. Clicking opens the lightbox owned by <Gallery>. */
 export function Cards({ image, alt, onOpen }) {
   return (
     <figure className="tile" onClick={onOpen}>
-      <img src={image} alt={alt} loading="lazy" />
+      <Picture src={image} alt={alt} sizes="(max-width: 700px) 46vw, 300px" />
     </figure>
   );
 }
@@ -39,7 +41,7 @@ export function Gallery({ items }) {
       {active !== null && (
         <div className="lightbox" onClick={() => setActive(null)} role="dialog" aria-modal="true">
           <button className="lightbox__close" aria-label="Close">
-            <i className="fa-solid fa-xmark" aria-hidden="true" />
+            <Icon name="xmark" />
           </button>
           <button
             className="lightbox__nav lightbox__nav--prev"
@@ -49,7 +51,7 @@ export function Gallery({ items }) {
               setActive((i) => (i - 1 + items.length) % items.length);
             }}
           >
-            <i className="fa-solid fa-chevron-left" aria-hidden="true" />
+            <Icon name="chevron-left" />
           </button>
           <figure onClick={(event) => event.stopPropagation()}>
             <img src={items[active].src} alt={items[active].alt} />
@@ -63,7 +65,7 @@ export function Gallery({ items }) {
               setActive((i) => (i + 1) % items.length);
             }}
           >
-            <i className="fa-solid fa-chevron-right" aria-hidden="true" />
+            <Icon name="chevron-right" />
           </button>
         </div>
       )}

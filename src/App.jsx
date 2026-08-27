@@ -1,9 +1,76 @@
 import { useState } from "react";
 import { Gallery } from "./components/cards";
 import { Hero } from "./components/hero";
+import { Icon } from "./components/icon";
 import { CallButton, Navbar } from "./components/navbar";
+import { Picture } from "./components/picture";
 import { CopyPhone, Footer, Section } from "./components/section";
 import { asset, BUSINESS, HIGHLIGHTS, SERVICES, whatsappLink } from "./data/site";
+import { CLAIMS, pageUrl } from "./data/services";
+import { PAGE_META } from "./data/page-meta";
+
+/**
+ * The routing block. Every Google Ads keyword now has a dedicated landing page,
+ * and this grid is how an organic visitor — and Googlebot — reaches all six
+ * from the homepage.
+ */
+const GRID_LEADS = {
+  curtains: "Made to measure, sewn in our workshop and fitted by our own team.",
+  blinds: "Roller, Roman, venetian, vertical and shutters, measured to the recess.",
+  wallpaper: "Supply and hanging, including the wall preparation underneath.",
+  painting: "Interior and exterior, with the filling and priming done properly.",
+  flooring: "Wooden, parquet, vinyl and carpet, laid over a prepared subfloor.",
+  ceilings: "Gypsum ceilings, cove lighting, and gypsum or glass partitions.",
+};
+
+const GRID_IMAGES = {
+  curtains: { src: "/images/curtain/pic4.jpeg", alt: "Sheer linen curtains beneath a carved pelmet" },
+  blinds: { src: "/images/curtain/blinds3.png", alt: "Wooden venetian blinds in warm daylight" },
+  wallpaper: { src: "/images/wallpaper/wallpaper3.png", alt: "Textured feature wallpaper in a styled interior" },
+  painting: { src: null, alt: "" },
+  flooring: { src: "/images/parquet/pic24.jpg", alt: "Herringbone oak parquet being laid by hand" },
+  ceilings: { src: "/images/curtain/pic13.jpeg", alt: "Glass-partitioned office bay fitted with vertical blinds" },
+};
+
+function ServiceGrid() {
+  return (
+    <Section
+      id="services"
+      eyebrow="What we do"
+      heading="Six trades, one team"
+      lead="Everything below is measured, supplied and installed by us — including the parts most suppliers hand off to someone else."
+    >
+      <div className="svc-grid">
+        {PAGE_META.map((page) => {
+          const image = GRID_IMAGES[page.slug];
+          return (
+            <a className="svc-card" key={page.slug} href={pageUrl(page.slug)}>
+              <div className="svc-card__media">
+                {image.src ? (
+                  <Picture
+                    src={asset(image.src)}
+                    alt={image.alt}
+                    sizes="(max-width: 700px) 92vw, 380px"
+                    widths={[640]}
+                  />
+                ) : (
+                  <span className="svc-card__placeholder" aria-hidden="true" />
+                )}
+              </div>
+              <div className="svc-card__body">
+                <h3>{page.nav}</h3>
+                <p>{GRID_LEADS[page.slug]}</p>
+                <span className="svc-card__go">
+                  See {page.nav.toLowerCase()} <Icon name="arrow-right" />
+                </span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </Section>
+  );
+}
 
 function Highlights() {
   return (
@@ -18,7 +85,12 @@ function Highlights() {
         {HIGHLIGHTS.map((item) => (
           <div className="why__pair" key={item.n}>
             <figure className="why__figure">
-              <img src={item.image} alt={item.alt} loading="lazy" />
+              <Picture
+                src={item.image}
+                alt={item.alt}
+                sizes="(max-width: 700px) 92vw, 300px"
+                widths={[640]}
+              />
             </figure>
             <div className="why__note">
               <span className="why__n">{item.n}</span>
@@ -35,10 +107,14 @@ function Highlights() {
 function FeatureBand() {
   return (
     <section className="band">
-      <img src={asset("/images/curtain/pic1.jpeg")} alt="Pleated drapes with tie-backs layered over sheers in a bedroom" loading="lazy" />
+      <Picture
+        src={asset("/images/curtain/pic1.jpeg")}
+        alt="Pleated drapes with tie-backs layered over sheers in a bedroom"
+        sizes="100vw"
+      />
       <div className="band__card">
         <span className="band__icon">
-          <i className="fa-solid fa-ruler-combined" aria-hidden="true" />
+          <Icon name="ruler-combined" />
         </span>
         <p>
           Bring us a window and we&rsquo;ll bring the fabric book. We measure on site, show you
@@ -49,61 +125,40 @@ function FeatureBand() {
   );
 }
 
-function ServiceRow({ service, onView }) {
+function Claims() {
   return (
-    <article className="offer" id={`service-${service.id}`}>
-      <figure className="offer__media">
-        <img src={service.image} alt={service.alt} loading="lazy" />
-      </figure>
-
-      <div className="offer__card">
-        <h3>{service.name}</h3>
-        <p className="offer__lead">{service.lead}</p>
-        <ul className="offer__points">
-          {service.points.map((point) => (
-            <li key={point}>{point}</li>
-          ))}
-        </ul>
-        <div className="offer__foot">
-          <span className="offer__note">{service.footnote}</span>
-          <a className="btn btn--accent" href="#work" onClick={() => onView(service.id)}>
-            See the work
-          </a>
-        </div>
+    <Section
+      id="claims"
+      className="block--why-flat"
+      eyebrow="Quality · Trust · Excellence"
+      heading="What you get from us"
+    >
+      <div className="claims">
+        {CLAIMS.map((claim) => (
+          <div className="claims__item" key={claim.title}>
+            <h3>{claim.title}</h3>
+            <p>{claim.body}</p>
+          </div>
+        ))}
       </div>
-    </article>
+    </Section>
   );
 }
 
 function App() {
   const [activeService, setActiveService] = useState(SERVICES[0].id);
-
-  const showService = (id) => setActiveService(id);
-
   const current = SERVICES.find((service) => service.id === activeService) ?? SERVICES[0];
 
   return (
     <>
-      <Navbar onPickService={showService} />
+      <Navbar />
       <CallButton />
 
       <main className="page">
         <Hero />
+        <ServiceGrid />
         <Highlights />
         <FeatureBand />
-
-        <Section
-          id="services"
-          eyebrow="What we do"
-          heading="Four trades, one team"
-          lead="Everything below is measured, supplied and installed by us — including the parts most suppliers hand off."
-        >
-          <div className="offers">
-            {SERVICES.map((service) => (
-              <ServiceRow key={service.id} service={service} onView={showService} />
-            ))}
-          </div>
-        </Section>
 
         <Section
           id="work"
@@ -130,15 +185,21 @@ function App() {
           <Gallery items={current.gallery} />
         </Section>
 
+        <Claims />
+
         <section className="about" id="about">
-          <img src={asset("/images/decore1.png")} alt="Draped curtain beside a cane armchair" loading="lazy" />
+          <Picture
+            src={asset("/images/decore1.png")}
+            alt="Draped curtain beside a cane armchair"
+            sizes="(max-width: 900px) 100vw, 520px"
+          />
           <div className="about__body">
             <p className="eyebrow">About us</p>
             <h2>Abu Dhabi&rsquo;s décor workshop since day one</h2>
             <p>
-              We cover wall décor, table décor, curtains, carpets, flooring, wallpaper,
-              blinds and shutters — along with glass tinting, painting, ceilings, lighting
-              and room partitions. If it shapes how a room feels, we fit it.
+              We cover curtains, blinds and shutters, wallpaper, wall painting, carpets,
+              wooden and vinyl flooring, false ceilings, lighting and room partitions —
+              for homes and for commercial projects. If it shapes how a room feels, we fit it.
             </p>
             <a className="btn btn--accent" href={whatsappLink({ service: "General enquiry" })} target="_blank" rel="noreferrer">
               Start a project
@@ -147,23 +208,31 @@ function App() {
         </section>
 
         <Section id="clients" className="block--clients" eyebrow="Trusted by" heading="Our clients">
-          <img className="clients__strip" src={asset("/images/companies.png")} alt="Logos of companies we have worked with" loading="lazy" />
+          <Picture
+            className="clients__strip"
+            src={asset("/images/companies.png")}
+            alt="Logos of companies we have worked with"
+            sizes="(max-width: 900px) 100vw, 900px"
+          />
         </Section>
 
         <Section id="visit" className="block--visit" eyebrow="Contact" heading="Come and see the fabrics">
           <div className="visit__grid">
             <div className="visit__card">
-              <h3>Showroom</h3>
+              <h3>
+                <Icon name="map-pin" /> Showroom
+              </h3>
               {BUSINESS.address.map((line) => (
                 <p key={line}>{line}</p>
               ))}
+              <p>P.O. Box 13074, Abu Dhabi</p>
               <a
                 className="link-arrow"
                 href="https://maps.google.com/?q=Hamad+Center+Electra+Street+Abu+Dhabi"
                 target="_blank"
                 rel="noreferrer"
               >
-                Open in Maps
+                Open in Google Maps
               </a>
             </div>
 
@@ -171,9 +240,22 @@ function App() {
               <h3>Call or message</h3>
               <CopyPhone />
               <p>Saturday to Thursday, 9am – 9pm.</p>
-              <a className="btn btn--accent" href={`https://wa.me/${BUSINESS.whatsapp}`} target="_blank" rel="noreferrer">
-                WhatsApp us
-              </a>
+              <div className="visit__actions">
+                <a className="btn btn--accent" href={BUSINESS.phoneHref}>
+                  <Icon name="phone" /> {BUSINESS.phone}
+                </a>
+                <a
+                  className="btn btn--ghost-dark"
+                  href={`https://wa.me/${BUSINESS.whatsapp}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Icon name="whatsapp" /> WhatsApp
+                </a>
+              </div>
+              <p className="visit__mail">
+                <a href="mailto:alamasidream@gmail.com">alamasidream@gmail.com</a>
+              </p>
             </div>
           </div>
         </Section>
