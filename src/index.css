@@ -267,6 +267,11 @@ body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
   display: flex;
   align-items: flex-end;
 }
+/* Painting and ceilings have no photograph of their own and fall back to the
+   gradient rather than borrowing an unrelated image. */
+.hero--plain {
+  background: linear-gradient(135deg, var(--dark) 0%, #3a2e1d 58%, var(--dark-2) 100%);
+}
 .hero__bg {
   position: absolute;
   inset: 0;
@@ -291,7 +296,7 @@ body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
   align-items: end;
 }
 .hero__copy { color: #fff; }
-.hero__copy h1 { margin: 20px 0 18px; color: #fff; }
+.hero__copy h1 { margin: 20px 0 18px; color: #fff; max-width: 18ch; }
 .hero__lead {
   max-width: 46ch;
   color: rgba(255, 255, 255, 0.84);
@@ -696,7 +701,7 @@ body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 
 /* ---------------------------------------------------------- contact CTA
-   Used by both the homepage measure card and every service lander. Sized so
+   Lives in the enquiry card, so the homepage and all six service pages. Sized so
    the pair clears 44px tap targets and lands above the fold at 390px, which
    is the viewport almost every local search arrives on. */
 .cta {
@@ -739,41 +744,6 @@ body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
    brand colour - ink on #25d366 is 8.7:1. */
 .cta__btn--wa { background: #25d366; color: var(--ink); }
 .cta__btn--wa:hover { background: #2ee070; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
-
-/* ---------------------------------------------------------- service lander
-   Shorter than the homepage hero so the H1, the city and both contact buttons
-   fit in one phone screen. The nav is fixed inside this box exactly as it is
-   inside .hero, so the lander must stay the first child of .page. */
-.lander {
-  position: relative;
-  min-height: min(72vh, 680px);
-  display: flex;
-  align-items: flex-end;
-  padding: clamp(96px, 13vh, 150px) clamp(20px, 3.4vw, 52px) clamp(28px, 4vw, 52px);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-}
-.lander--plain {
-  background: linear-gradient(135deg, var(--dark) 0%, #3a2e1d 58%, var(--dark-2) 100%);
-}
-.lander__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.lander__scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(20, 17, 12, 0.9) 0%, rgba(20, 17, 12, 0.45) 56%, rgba(20, 17, 12, 0.62) 100%);
-}
-.lander__inner {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
-  max-width: 760px;
-  color: #fff;
-}
-.lander__inner h1 { color: #fff; max-width: 17ch; }
-.lander__lead { color: rgba(255, 255, 255, 0.82); max-width: 56ch; font-size: clamp(0.98rem, 1.2vw, 1.08rem); }
-.lander__note { font-size: 0.82rem; color: rgba(255, 255, 255, 0.62); }
 
 /* ---------------------------------------------------------- service grid */
 .svc-grid {
@@ -989,7 +959,6 @@ body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 @media (max-width: 620px) {
   .cta { grid-template-columns: minmax(0, 1fr); max-width: none; }
-  .lander { min-height: min(76vh, 640px); }
   .nav__cta { padding: 0; width: 44px; height: 44px; border-radius: 50%; }
   .nav__cta-label { display: none; }
   .nav__cta .icon { width: 1.05rem; height: 1.05rem; }

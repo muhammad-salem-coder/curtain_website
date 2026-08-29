@@ -5,7 +5,7 @@ import { Icon } from "./components/icon";
 import { CallButton, Navbar } from "./components/navbar";
 import { Picture } from "./components/picture";
 import { CopyPhone, Footer, Section } from "./components/section";
-import { asset, BUSINESS, HIGHLIGHTS, SERVICES, whatsappLink } from "./data/site";
+import { asset, BUSINESS, HERO_IMAGE, HIGHLIGHTS, SERVICES, whatsappLink } from "./data/site";
 import { CLAIMS, pageUrl } from "./data/services";
 import { PAGE_META } from "./data/page-meta";
 
@@ -155,7 +155,11 @@ function App() {
       <CallButton />
 
       <main className="page">
-        <Hero />
+        <Hero
+          image={{ src: HERO_IMAGE }}
+          heading={<>Curtains, blinds &amp; interior fit-out in Abu Dhabi</>}
+          lead="Curtains, blinds, wallpaper, painting, flooring, ceilings and partitions — measured, supplied and fitted by one team across Abu Dhabi."
+        />
         <ServiceGrid />
         <Highlights />
         <FeatureBand />

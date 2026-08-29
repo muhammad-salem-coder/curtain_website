@@ -1,76 +1,10 @@
 import { Gallery } from "./cards";
+import { Hero } from "./hero";
 import { Icon } from "./icon";
 import { Navbar, CallButton } from "./navbar";
-import { Picture } from "./picture";
 import { Footer, Section } from "./section";
 import { BUSINESS, whatsappLink } from "../data/site";
 import { CLAIMS, findPage, pageUrl } from "../data/services";
-
-/**
- * The lander. Everything a Google Ads visitor needs to act is inside this one
- * block: what the service is, that it is in Abu Dhabi, and two thumb-sized
- * contact buttons — all above the fold at 390px, which is the viewport nearly
- * every local curtain and fit-out search arrives on.
- *
- * Pages with no photograph of their own (painting, ceilings) fall back to the
- * dark gradient rather than borrowing an unrelated image: a curtain photo on
- * the painting page is exactly the relevance mismatch this rebuild exists to
- * fix.
- */
-function Lander({ page }) {
-  return (
-    <section className={`lander ${page.hero ? "" : "lander--plain"}`} id="top">
-      {page.hero && (
-        <>
-          <Picture
-            className="lander__bg"
-            src={page.hero.src}
-            alt=""
-            priority
-            sizes="100vw"
-          />
-          <div className="lander__scrim" />
-        </>
-      )}
-
-      <div className="lander__inner">
-        <p className="pill pill--ghost">
-          <span className="dot" /> Electra Street, Abu Dhabi
-        </p>
-
-        <h1>{page.h1}</h1>
-        <p className="lander__lead">{page.lead}</p>
-
-        <div className="cta">
-          <a className="cta__btn cta__btn--call" href={BUSINESS.phoneHref}>
-            <Icon name="phone" />
-            <span>
-              <small>Call now</small>
-              {BUSINESS.phone}
-            </span>
-          </a>
-
-          <a
-            className="cta__btn cta__btn--wa"
-            href={whatsappLink({ service: page.nav })}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Icon name="whatsapp" />
-            <span>
-              <small>Message us</small>
-              WhatsApp
-            </span>
-          </a>
-        </div>
-
-        <p className="lander__note">
-          Free site measure and quote · Saturday to Thursday, 9am – 9pm
-        </p>
-      </div>
-    </section>
-  );
-}
 
 function Offer({ offer }) {
   return (
@@ -206,7 +140,12 @@ export function ServicePage({ slug }) {
       <CallButton service={page.nav} />
 
       <main className="page">
-        <Lander page={page} />
+        <Hero
+          image={page.hero}
+          heading={page.h1}
+          lead={page.lead}
+          service={page.nav}
+        />
 
         <Section id="about-service" className="block--prose">
           <div className="prose">

@@ -1,14 +1,17 @@
 import { Icon } from "./icon";
 import { Picture } from "./picture";
-import { BUSINESS, HERO_IMAGE, whatsappLink } from "../data/site";
+import { BUSINESS, whatsappLink } from "../data/site";
 
 /**
  * Phone-first by design — there is no form and no email backend. Both contact
- * routes now sit side by side in the card: calling was already above the fold
- * at 390px, but WhatsApp was only reachable through the unlabelled floating
+ * routes sit side by side in the card: calling was already above the fold at
+ * 390px, but WhatsApp was only reachable through the unlabelled floating
  * circle, and WhatsApp is how most enquiries in Abu Dhabi actually start.
+ *
+ * `service` pre-fills the WhatsApp message so an enquiry arrives already saying
+ * which trade it is about.
  */
-function MeasureCard() {
+function MeasureCard({ service }) {
   return (
     <aside className="enquiry">
       <h2 className="enquiry__title">Request a free measure</h2>
@@ -27,7 +30,7 @@ function MeasureCard() {
 
         <a
           className="cta__btn cta__btn--wa"
-          href={whatsappLink({ service: "General enquiry" })}
+          href={whatsappLink({ service })}
           target="_blank"
           rel="noreferrer"
         >
@@ -44,25 +47,40 @@ function MeasureCard() {
   );
 }
 
-export function Hero() {
+/**
+ * One hero for the homepage and all six service pages, so a visitor arriving on
+ * /wallpaper/ from an ad gets the same layout, the same enquiry card and the
+ * same contact affordances as one who lands on the homepage.
+ *
+ * `image` is null on the pages with no photograph of their own (painting,
+ * ceilings), which fall back to the dark gradient rather than borrowing an
+ * unrelated one — a curtain photo on the painting page is exactly the relevance
+ * mismatch this rebuild exists to fix.
+ *
+ * The nav is `position: fixed` inside this box, so the hero must stay the first
+ * child of `.page`; if it floats above, the nav's white text lands on the cream
+ * background and disappears.
+ */
+export function Hero({ image, heading, lead, service = "General enquiry" }) {
   return (
-    <section className="hero" id="top">
-      <Picture className="hero__bg" src={HERO_IMAGE} alt="" priority sizes="100vw" />
-      <div className="hero__scrim" />
+    <section className={`hero ${image ? "" : "hero--plain"}`} id="top">
+      {image && (
+        <>
+          <Picture className="hero__bg" src={image.src} alt="" priority sizes="100vw" />
+          <div className="hero__scrim" />
+        </>
+      )}
 
       <div className="hero__inner">
         <div className="hero__copy">
           <p className="pill pill--ghost">
             <span className="dot" /> Electra Street, Abu Dhabi
           </p>
-          <h1>Curtains, blinds &amp; interior fit-out in Abu Dhabi</h1>
-          <p className="hero__lead">
-            Curtains, blinds, wallpaper, painting, flooring, ceilings and partitions —
-            measured, supplied and fitted by one team across Abu Dhabi.
-          </p>
+          <h1>{heading}</h1>
+          <p className="hero__lead">{lead}</p>
         </div>
 
-        <MeasureCard />
+        <MeasureCard service={service} />
       </div>
     </section>
   );

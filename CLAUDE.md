@@ -142,7 +142,8 @@ src/
     image-sizes.json  GENERATED intrinsic dimensions
   components/
     navbar.jsx        floating pill nav + mobile menu
-    hero.jsx          homepage hero + "Request a free measure" card
+    hero.jsx          the ONE hero, shared by the homepage and all six
+                      service pages (image + copy + "Request a free measure")
     servicepage.jsx   shared shell for all six service pages
     picture.jsx       <picture> with WebP srcset + intrinsic sizing
     icon.jsx          inline SVG icon set
@@ -174,12 +175,28 @@ Nothing scans the directory. If you skip `npm run images`, `<Picture>` notices
 the missing size entry and serves the original rather than a broken tile — but
 the page then ships a full-size JPEG, so do not rely on it.
 
+## The hero
+
+`<Hero>` in `src/components/hero.jsx` renders the homepage hero *and* every
+service page lander — same two-column layout, same enquiry card, same contact
+affordances, so an ad visitor landing on /wallpaper/ sees what a homepage
+visitor sees. Props: `image` (null falls back to `.hero--plain`, the dark
+gradient, on the pages with no photograph of their own), `heading`, `lead`, and
+`service`, which pre-fills the WhatsApp message with the trade.
+
+There was briefly a separate single-column `.lander` for service pages; it is
+gone. Do not reintroduce a second hero — keeping one means a change to the
+enquiry card reaches all seven pages at once.
+
+`.hero__copy h1` is capped at 18ch: the service H1s run longer than the
+homepage's, and without the cap the enquiry card drops below the fold at 390px.
+
 ## Contact — there is no form or email backend
 
-The hero card is phone-first by design: a `tel:` link plus two buttons that jump
-to lower sections. The nav pill is also a `tel:` link labelled just "Contact"
-(the number lives in its `aria-label`). WhatsApp remains via the floating button
-and the About section's "Start a project", built by `whatsappLink()`.
+The hero card is phone-first by design: a `tel:` link and a WhatsApp link, both
+in every hero. The nav pill is also a `tel:` link labelled just "Contact" (the
+number lives in its `aria-label`). WhatsApp is additionally on the floating
+button and the About section's "Start a project", built by `whatsappLink()`.
 
 Wiring up email would need either a form service (Formspree / Web3Forms — works
 on static hosting) or a serverless function. **Resend cannot be called from the
@@ -251,7 +268,7 @@ and an RTL pass over the physical `left`/`right` offsets in `.nav`,
 ## Known issues
 
 - **No photographs of painting, ceilings or partitions exist in the repo.** Those
-  two landing pages render a plain dark lander and carry a "photos being added"
+  two landing pages render the plain dark hero and carry a "photos being added"
   note. Real job photos are the single biggest remaining improvement to them.
 - Flooring has only three photos, all parquet, while the ad keywords also cover
   vinyl and carpet.
